@@ -11,10 +11,13 @@
 // includes
 // --------
 
-#include <cassert> // assert
-#include <cstddef> // size_t
-#include <utility> // make_pair, pair
-#include <vector>  // vector
+#include <cassert>   // assert
+#include <cstddef>   // size_t
+#include <utility>   // make_pair, pair
+#include <vector>    // vector
+#include <limits>    // used to find unique vert_desc
+#include <algorithm> // sort
+
 
 using namespace std;
 
@@ -24,6 +27,7 @@ using namespace std;
 
 class Graph {
     public:
+    
         // --------
         // typedefs
         // --------
@@ -31,8 +35,8 @@ class Graph {
         typedef int vertex_descriptor;
         typedef pair<vertex_descriptor,vertex_descriptor> edge_descriptor;
 
-        typedef vector<vector<edge_descriptor>>::iterator vertex_iterator;
-        typedef vector<edge_descriptor>::iterator edge_iterator;
+        typedef vector< vertex_descriptor>::iterator vertex_iterator;
+        typedef vector< edge_descriptor>::iterator edge_iterator;
         typedef int* adjacency_iterator;
 
         typedef size_t vertices_size_type;
@@ -47,17 +51,46 @@ class Graph {
          * adds edge to src's edge list, if already present it will not duplicate
          * bool pertains to the element being added(T) or not(F)
          */
+         
+        struct vSort {
+   			bool operator()(pair< vertex_descriptor, vector< edge_descriptor> > a, pair< vertex_descriptor, vector< edge_descriptor> > b) { return a.first < b.first; }};
+   		
+   		struct edgeSort{
+   			bool operator()(edge_descriptor a, edge_descriptor b) { return a.second < b.second; }};
+         
         friend pair<edge_descriptor, bool> add_edge (vertex_descriptor src, vertex_descriptor dest, Graph& x) {
-            bool b;
+        
             edge_descriptor ed = make_pair(src,dest);
-
-            if(find(x.g[src].begin(), x.g[src].end(), make_pair(src,dest)) != x.g[src].end())
-                b = false;
-            else {
-                x.g[src].push_back(ed);
-                x.edges.push_back(ed);}
+			vertex_descriptor vdi = x.lookup(src);
+			vertex_descriptor check_dest = x.lookup(dest);
+			
+			// check if vertices are in g
+			if(vdi == numeric_limits<int>::max()) {
+                x.g.push_back(make_pair(src,vector<edge_descriptor>()));
+				sort(x.g.begin(), x.g.end(),vSort());
+				
+				x.verts.push_back(src);
+				sort(x.verts.begin(), x.verts.end());
+				
+				vdi = x.lookup(src);}
+			if(check_dest == numeric_limits<int>::max()) {
+                x.g.push_back(make_pair(src,vector<edge_descriptor>()));
+				sort(x.g.begin(), x.g.end(), vSort());
+				
+				x.verts.push_back(dest);
+				sort(x.verts.begin(), x.verts.end());}
+				
+			// check if the new edge is already present
+            else if(find(x.g[vdi].second.begin(), x.g[vdi].second.end(), make_pair(src,dest)) != x.g[vdi].second.end())
+                return make_pair(ed,false);
+                
+            x.g[vdi].second.push_back(ed);
+            sort(x.g[vdi].second.begin(), x.g[vdi].second.end(), edgeSort());
             
-            return make_pair(ed, b);}
+            x.edges.push_back(ed);
+			sort(x.edges.begin(), x.edges.end(), edgeSort());
+			
+            return make_pair(ed, true);}
 
         // ----------
         // add_vertex
@@ -68,9 +101,11 @@ class Graph {
          * returns the index (acts as vertex desc)
          */
         friend vertex_descriptor add_vertex (Graph& x) {
-            vertex_descriptor v = x.g.size();
-            x.g.push_back(vector<edge_descriptor>());
-            return v;}
+            vertex_descriptor rvd = x.randomvd();
+            x.g.push_back(make_pair(rvd,vector<edge_descriptor>()));
+			sort(x.g.begin(), x.g.end(), vSort());
+            x.verts.push_back(rvd);
+            return rvd;}
 
         // -----------------
         // adjacent_vertices
@@ -94,25 +129,21 @@ class Graph {
          * returns edge,true if the edge is their and blank edge,false if not
          */
         friend pair<edge_descriptor, bool> edge (vertex_descriptor src, vertex_descriptor dest, const Graph& x) {
-            pair<edge_descriptor, bool> r;
-            if(find(x.g[src].begin(), x.g[src].end(), make_pair(src,dest)) != x.g[src].end())
-                r = make_pair(make_pair(src,dest),true);
-            else 
-                r = make_pair(make_pair(0,0),false);
-
-            return r;}
+            
+            vertex_descriptor vdi = x.lookup(src);
+            if(find(x.g[vdi].second.begin(), x.g[vdi].second.end(), make_pair(src,dest)) != x.g[vdi].second.end())
+                return make_pair(make_pair(src,dest),true);
+            return make_pair(make_pair(0,0),false);}
 
         // -----
         // edges
         // -----
 
         /**
-         * returns the returns a pair beginning and end iterator of a vertex's edge vector
+         * returns a pair beginning and end iterator of all the edges
          */
         friend pair<edge_iterator, edge_iterator> edges (Graph& x) {
-            edge_iterator b = x.edges.begin();
-            edge_iterator e = x.edges.end();
-            return make_pair(b, e);}
+            return make_pair(x.edges.begin(), x.edges.end());}
 
         // ---------
         // num_edges
@@ -122,9 +153,7 @@ class Graph {
          * returns the number of edges in graph g
          */
         friend edges_size_type num_edges (const Graph& x) {
-            edges_size_type est;
-            est = x.edges.size();
-            return est;}
+            return x.edges.size();}
 
         // ------------
         // num_vertices
@@ -134,9 +163,7 @@ class Graph {
          * returns how many vertices are in the graph
          */
         friend vertices_size_type num_vertices (const Graph& x) {
-            vertices_size_type vst;
-            vst = x.g.size();
-            return vst;}
+            return x.verts.size();}
 
         // ------
         // source
@@ -156,9 +183,7 @@ class Graph {
          * returns the target of an edge
          */
         friend vertex_descriptor target (edge_descriptor ed, const Graph&) {
-            vertex_descriptor vd;
-            vd = ed.second;
-            return vd;}
+            return ed.second;}
 
         // ------
         // vertex
@@ -168,8 +193,7 @@ class Graph {
          * returns the nth vertex in the graph's vertex list
          */
         friend vertex_descriptor vertex (vertices_size_type n, const Graph& x) {
-            vertex_descriptor v = 0+n;
-            return v;}
+            return x.verts[n];}
 
         // --------
         // vertices
@@ -179,28 +203,58 @@ class Graph {
          * returns a pair beginning and end iterator of the vertex vector
          */
         friend pair<vertex_iterator, vertex_iterator> vertices (Graph& x) {
-            vertex_iterator b = x.g.begin();
-            vertex_iterator e = x.g.end();
-            return make_pair(b, e);}
+            return make_pair(x.verts.begin(), x.verts.end());}
 
     private:
         // ----
         // data
         // ----
 
-        vector< vector< edge_descriptor> > g;
+        vector< pair< vertex_descriptor, vector< edge_descriptor> > > g;
         vector< edge_descriptor> edges;
+        vector< vertex_descriptor> verts;
 
         // -----
         // valid
         // -----
 
         /**
-         * <your documentation>
+         * check if valid container
          */
         bool valid () const {
-            // <your code>
             return true;}
+            
+		// -----
+        // lookup
+        // -----
+
+        /**
+         * returns the index of the given vert desc
+         */        
+         vertex_descriptor lookup(vertex_descriptor vd) const {
+         	size_t i;
+         	for(i = 0; i < verts.size(); ++i)
+         		if(verts[i] == vd) return i;
+         		
+         	return -1;}
+         	
+         // -----
+        // randomvd
+        // -----
+
+        /**
+         * returns a random unused vector_descriptor
+         */
+         vertex_descriptor randomvd() {
+         	vertex_descriptor x;
+         	for(x = 0; x < numeric_limits<int>::max(); ++x){
+         		size_t i;
+         		bool goodvd = true;
+         		for(i = 0; i < verts.size(); ++i){
+    				if(x == verts[i]) goodvd = false;}
+    			if(goodvd) return x;}
+    			
+    		return numeric_limits<int>::max();}
 
     public:
         // ------------
@@ -208,13 +262,10 @@ class Graph {
         // ------------
 
         /**
-         * <your documentation>
+         * default const calls default construct of containers
+         * and checks if the graph is valid
          */
-        Graph () :
-	    g(vector< vector< edge_descriptor> >()),
-	    edges(vector< edge_descriptor>())	
-	    {
-             assert(valid());}
+        Graph () {assert(valid());}
 
         // Default copy, destructor, and copy assignment
         // Graph  (const Graph<T>&);
