@@ -37,12 +37,20 @@ class Graph {
 
         typedef vector< vertex_descriptor>::iterator vertex_iterator;
         typedef vector< edge_descriptor>::iterator edge_iterator;
-        typedef int* adjacency_iterator;
+        typedef vector< vertex_descriptor>::iterator adjacency_iterator;
 
         typedef size_t vertices_size_type;
         typedef size_t edges_size_type;
 
     public:
+
+        // sorts to keep vector (indexadble) ordered
+        struct vSort {
+            bool operator()(pair< vertex_descriptor, vector< edge_descriptor> > a, pair< vertex_descriptor, vector< edge_descriptor> > b) { return a.first < b.first; }};
+        
+        struct edgeSort{
+            bool operator()(edge_descriptor a, edge_descriptor b) { return a.second < b.second; }};
+
         // --------
         // add_edge
         // --------
@@ -51,13 +59,6 @@ class Graph {
          * adds edge to src's edge list, if already present it will not duplicate
          * bool pertains to the element being added(T) or not(F)
          */
-         
-        struct vSort {
-   			bool operator()(pair< vertex_descriptor, vector< edge_descriptor> > a, pair< vertex_descriptor, vector< edge_descriptor> > b) { return a.first < b.first; }};
-   		
-   		struct edgeSort{
-   			bool operator()(edge_descriptor a, edge_descriptor b) { return a.second < b.second; }};
-         
         friend pair<edge_descriptor, bool> add_edge (vertex_descriptor src, vertex_descriptor dest, Graph& x) {
         
             edge_descriptor ed = make_pair(src,dest);
@@ -103,7 +104,7 @@ class Graph {
         friend vertex_descriptor add_vertex (Graph& x) {
             vertex_descriptor rvd = x.randomvd();
             x.g.push_back(make_pair(rvd,vector<edge_descriptor>()));
-			sort(x.g.begin(), x.g.end(), vSort());
+	    sort(x.g.begin(), x.g.end(), vSort());
             x.verts.push_back(rvd);
             return rvd;}
 
@@ -112,13 +113,16 @@ class Graph {
         // -----------------
 
         /**
-         * <your documentation>
+         * returns the beg, end iterators of the vectors adjacent vectors
          */
-        friend pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor, const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            adjacency_iterator b = a;
-            adjacency_iterator e = a + 2;
+        friend pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor vd, Graph& x) {
+			vertex_descriptor vdi = x.lookup(vd);
+			x.avs = vector< vertex_descriptor>();
+			size_t i;
+			for(i = 0; i < x.g[vdi].second.size(); ++i)
+				x.avs.push_back(x.g[vdi].second[i].second);
+            adjacency_iterator b = x.avs.begin();
+            adjacency_iterator e = x.avs.end();
             return make_pair(b, e);}
 
         // ----
@@ -203,7 +207,7 @@ class Graph {
          * returns a pair beginning and end iterator of the vertex vector
          */
         friend pair<vertex_iterator, vertex_iterator> vertices (Graph& x) {
-            return make_pair(x.verts.begin(), x.verts.end());}
+        	return make_pair(x.verts.begin(), x.verts.end());}
 
     private:
         // ----
@@ -213,6 +217,9 @@ class Graph {
         vector< pair< vertex_descriptor, vector< edge_descriptor> > > g;
         vector< edge_descriptor> edges;
         vector< vertex_descriptor> verts;
+		
+		// temp to put adj verts
+		vector< vertex_descriptor> avs;
 
         // -----
         // valid
@@ -222,7 +229,7 @@ class Graph {
          * check if valid container
          */
         bool valid () const {
-            return true;}
+            return g.size() >= 0;}
             
 		// -----
         // lookup
@@ -235,7 +242,7 @@ class Graph {
          	size_t i;
          	for(i = 0; i < verts.size(); ++i)
          		if(verts[i] == vd) return i;
-         		
+         	
          	return -1;}
          	
          // -----
