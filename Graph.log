@@ -1,0 +1,35 @@
+commit b5c5ba3073e4756cb5b45b35c91c6d24087e72c5
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Mon Aug 4 14:43:02 2014 -0500
+
+    Hunter DeGroot's test/output
+
+commit dc5fea84f8136d56a2f24d98981468b728597acb
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Mon Aug 4 12:57:13 2014 -0500
+
+    final code part
+
+commit efb8cd118fac484367e09da853c2e50e8247d169
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Fri Aug 1 13:59:42 2014 -0500
+
+    works but needs to implement adjacency iteration
+
+commit 38e6536dbc586005df7eb55390f03ac8b08ad537
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Thu Jul 31 15:54:47 2014 -0500
+
+    works except for iterators
+
+commit 2e927f6ab2b4d46720d6caf0a0e9b5f8bd663952
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Mon Jul 28 09:13:29 2014 -0500
+
+    Skele files
+
+commit d8f47a2f8bda97c488d0bf7ef4b2380dbd7c402d
+Author: HunterDeGroot <hunterdegroot@gmail.com>
+Date:   Mon Jul 28 09:07:16 2014 -0500
+
+    Initial commit
