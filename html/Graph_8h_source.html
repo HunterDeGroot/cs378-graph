@@ -139,26 +139,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00062"></a><a class="code" href="classGraph.html#af3213cf71c61b1b0dddbc98f1b1faafa">00062</a>         <span class="keyword">friend</span> pair&lt;edge_descriptor, bool&gt; <a class="code" href="classGraph.html#af3213cf71c61b1b0dddbc98f1b1faafa">add_edge</a> (<a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> src, <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> dest, <a class="code" href="classGraph.html">Graph</a>&amp; x) {
 <a name="l00063"></a>00063         
 <a name="l00064"></a>00064             <a class="code" href="classGraph.html#a89cc13886360aec5e3f4e2e147d2ba75">edge_descriptor</a> ed = make_pair(src,dest);
-<a name="l00065"></a>00065                         <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(src);
-<a name="l00066"></a>00066                         <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> check_dest = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(dest);
+<a name="l00065"></a>00065             <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(src);
+<a name="l00066"></a>00066             <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> check_dest = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(dest);
 <a name="l00067"></a>00067                         
-<a name="l00068"></a>00068                         <span class="comment">// check if vertices are in g</span>
-<a name="l00069"></a>00069                         <span class="keywordflow">if</span>(vdi == numeric_limits&lt;int&gt;::max()) {
+<a name="l00068"></a>00068             <span class="comment">// check if vertices are in g</span>
+<a name="l00069"></a>00069             <span class="keywordflow">if</span>(vdi == numeric_limits&lt;int&gt;::max()) {
 <a name="l00070"></a>00070                 x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.push_back(make_pair(src,vector&lt;edge_descriptor&gt;()));
-<a name="l00071"></a>00071                                 sort(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.end(),<a class="code" href="structGraph_1_1vSort.html">vSort</a>());
+<a name="l00071"></a>00071                 sort(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.end(),<a class="code" href="structGraph_1_1vSort.html">vSort</a>());
 <a name="l00072"></a>00072                                 
-<a name="l00073"></a>00073                                 x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.push_back(src);
-<a name="l00074"></a>00074                                 sort(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());
+<a name="l00073"></a>00073                 x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.push_back(src);
+<a name="l00074"></a>00074                 sort(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());
 <a name="l00075"></a>00075                                 
-<a name="l00076"></a>00076                                 vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(src);}
-<a name="l00077"></a>00077                         <span class="keywordflow">if</span>(check_dest == numeric_limits&lt;int&gt;::max()) {
+<a name="l00076"></a>00076                 vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(src);}
+<a name="l00077"></a>00077             <span class="keywordflow">if</span>(check_dest == numeric_limits&lt;int&gt;::max()) {
 <a name="l00078"></a>00078                 x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.push_back(make_pair(src,vector&lt;edge_descriptor&gt;()));
-<a name="l00079"></a>00079                                 sort(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.end(), <a class="code" href="structGraph_1_1vSort.html">vSort</a>());
+<a name="l00079"></a>00079                 sort(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>.end(), <a class="code" href="structGraph_1_1vSort.html">vSort</a>());
 <a name="l00080"></a>00080                                 
-<a name="l00081"></a>00081                                 x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.push_back(dest);
-<a name="l00082"></a>00082                                 sort(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());}
+<a name="l00081"></a>00081                 x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.push_back(dest);
+<a name="l00082"></a>00082                 sort(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());}
 <a name="l00083"></a>00083                                 
-<a name="l00084"></a>00084                         <span class="comment">// check if the new edge is already present</span>
+<a name="l00084"></a>00084             <span class="comment">// check if the new edge is already present</span>
 <a name="l00085"></a>00085             <span class="keywordflow">else</span> <span class="keywordflow">if</span>(find(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.end(), make_pair(src,dest)) != x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.end())
 <a name="l00086"></a>00086                 <span class="keywordflow">return</span> make_pair(ed,<span class="keyword">false</span>);
 <a name="l00087"></a>00087                 
@@ -166,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00089"></a>00089             sort(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.begin(), x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.end(), <a class="code" href="structGraph_1_1edgeSort.html">edgeSort</a>());
 <a name="l00090"></a>00090             
 <a name="l00091"></a>00091             x.<a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>.push_back(ed);
-<a name="l00092"></a>00092                         sort(x.<a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>.begin(), x.<a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>.end(), <a class="code" href="structGraph_1_1edgeSort.html">edgeSort</a>());
+<a name="l00092"></a>00092             sort(x.<a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>.begin(), x.<a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>.end(), <a class="code" href="structGraph_1_1edgeSort.html">edgeSort</a>());
 <a name="l00093"></a>00093                         
 <a name="l00094"></a>00094             <span class="keywordflow">return</span> make_pair(ed, <span class="keyword">true</span>);}
 <a name="l00095"></a>00095 
@@ -186,11 +186,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00113"></a>00113         <span class="comment">// -----------------</span>
 <a name="l00114"></a>00114 
 <a name="l00118"></a><a class="code" href="classGraph.html#a458ca19a49ceaba43017b8fecaafa8d7">00118</a>         <span class="keyword">friend</span> pair&lt;adjacency_iterator, adjacency_iterator&gt; <a class="code" href="classGraph.html#a458ca19a49ceaba43017b8fecaafa8d7">adjacent_vertices</a> (<a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vd, <a class="code" href="classGraph.html">Graph</a>&amp; x) {
-<a name="l00119"></a>00119                         <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(vd);
-<a name="l00120"></a>00120                         x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a> = vector&lt; vertex_descriptor&gt;();
-<a name="l00121"></a>00121                         <span class="keywordtype">size_t</span> i;
-<a name="l00122"></a>00122                         <span class="keywordflow">for</span>(i = 0; i &lt; x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.size(); ++i)
-<a name="l00123"></a>00123                                 x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>.push_back(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second[i].second);
+<a name="l00119"></a>00119             <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vdi = x.<a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(vd);
+<a name="l00120"></a>00120             x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a> = vector&lt; vertex_descriptor&gt;();
+<a name="l00121"></a>00121             <span class="keywordtype">size_t</span> i;
+<a name="l00122"></a>00122             <span class="keywordflow">for</span>(i = 0; i &lt; x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second.size(); ++i)
+<a name="l00123"></a>00123                 x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>.push_back(x.<a class="code" href="classGraph.html#a27b06956e9f2740636b8745426c0d8e2">g</a>[vdi].second[i].second);
 <a name="l00124"></a>00124             <a class="code" href="classGraph.html#ad40f53b2a152de16f19ab7145e32ca29">adjacency_iterator</a> b = x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>.begin();
 <a name="l00125"></a>00125             <a class="code" href="classGraph.html#ad40f53b2a152de16f19ab7145e32ca29">adjacency_iterator</a> e = x.<a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>.end();
 <a name="l00126"></a>00126             <span class="keywordflow">return</span> make_pair(b, e);}
@@ -253,7 +253,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00204"></a>00204         <span class="comment">// --------</span>
 <a name="l00205"></a>00205 
 <a name="l00209"></a><a class="code" href="classGraph.html#ae3484b6e280fa455726a97eb8a4b246d">00209</a>         <span class="keyword">friend</span> pair&lt;vertex_iterator, vertex_iterator&gt; <a class="code" href="classGraph.html#ae3484b6e280fa455726a97eb8a4b246d">vertices</a> (<a class="code" href="classGraph.html">Graph</a>&amp; x) {
-<a name="l00210"></a>00210                 <span class="keywordflow">return</span> make_pair(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());}
+<a name="l00210"></a>00210             <span class="keywordflow">return</span> make_pair(x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.begin(), x.<a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>.end());}
 <a name="l00211"></a>00211 
 <a name="l00212"></a>00212     <span class="keyword">private</span>:
 <a name="l00213"></a>00213         <span class="comment">// ----</span>
@@ -264,8 +264,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00218"></a><a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">00218</a>         vector&lt; edge_descriptor&gt; <a class="code" href="classGraph.html#a05bb83d2073153d4fb8024e99cffa8cd">edges</a>;
 <a name="l00219"></a><a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">00219</a>         vector&lt; vertex_descriptor&gt; <a class="code" href="classGraph.html#ae018e1cfdbe70c09e66eda63362e4b90">verts</a>;
 <a name="l00220"></a>00220                 
-<a name="l00221"></a>00221                 <span class="comment">// temp to put adj verts</span>
-<a name="l00222"></a><a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">00222</a>                 vector&lt; vertex_descriptor&gt; <a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>;
+<a name="l00221"></a>00221         <span class="comment">// temp to put adj verts</span>
+<a name="l00222"></a><a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">00222</a>         vector&lt; vertex_descriptor&gt; <a class="code" href="classGraph.html#a43ac2008c636c007d1b8a56ab0c80d41">avs</a>;
 <a name="l00223"></a>00223 
 <a name="l00224"></a>00224         <span class="comment">// -----</span>
 <a name="l00225"></a>00225         <span class="comment">// valid</span>
@@ -274,31 +274,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00231"></a><a class="code" href="classGraph.html#ab73ffdaeaaa43310e80b87f0c44c29e4">00231</a>         <span class="keywordtype">bool</span> <a class="code" href="classGraph.html#ab73ffdaeaaa43310e80b87f0c44c29e4">valid</a> ()<span class="keyword"> const </span>{
 <a name="l00232"></a>00232             <span class="keywordflow">return</span> g.size() &gt;= 0;}
 <a name="l00233"></a>00233             
-<a name="l00234"></a>00234                 <span class="comment">// -----</span>
+<a name="l00234"></a>00234         <span class="comment">// -----</span>
 <a name="l00235"></a>00235         <span class="comment">// lookup</span>
 <a name="l00236"></a>00236         <span class="comment">// -----</span>
 <a name="l00237"></a>00237 
-<a name="l00241"></a><a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">00241</a>          <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> <a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(<a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vd)<span class="keyword"> const </span>{
-<a name="l00242"></a>00242                 <span class="keywordtype">size_t</span> i;
-<a name="l00243"></a>00243                 <span class="keywordflow">for</span>(i = 0; i &lt; verts.size(); ++i)
-<a name="l00244"></a>00244                         <span class="keywordflow">if</span>(verts[i] == vd) <span class="keywordflow">return</span> i;
+<a name="l00241"></a><a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">00241</a>         <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> <a class="code" href="classGraph.html#a822183f6e0e1062c80f4581008860d3f">lookup</a>(<a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> vd)<span class="keyword"> const </span>{
+<a name="l00242"></a>00242             <span class="keywordtype">size_t</span> i;
+<a name="l00243"></a>00243             <span class="keywordflow">for</span>(i = 0; i &lt; verts.size(); ++i)
+<a name="l00244"></a>00244                 <span class="keywordflow">if</span>(verts[i] == vd) <span class="keywordflow">return</span> i;
 <a name="l00245"></a>00245                 
-<a name="l00246"></a>00246                 <span class="keywordflow">return</span> -1;}
+<a name="l00246"></a>00246             <span class="keywordflow">return</span> -1;}
 <a name="l00247"></a>00247                 
-<a name="l00248"></a>00248          <span class="comment">// -----</span>
+<a name="l00248"></a>00248         <span class="comment">// -----</span>
 <a name="l00249"></a>00249         <span class="comment">// randomvd</span>
 <a name="l00250"></a>00250         <span class="comment">// -----</span>
 <a name="l00251"></a>00251 
-<a name="l00255"></a><a class="code" href="classGraph.html#ad59fd5bec735a259bacca0e4803e1aa3">00255</a>          <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> <a class="code" href="classGraph.html#ad59fd5bec735a259bacca0e4803e1aa3">randomvd</a>() {
-<a name="l00256"></a>00256                 <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> x;
-<a name="l00257"></a>00257                 <span class="keywordflow">for</span>(x = 0; x &lt; numeric_limits&lt;int&gt;::max(); ++x){
-<a name="l00258"></a>00258                         <span class="keywordtype">size_t</span> i;
-<a name="l00259"></a>00259                         <span class="keywordtype">bool</span> goodvd = <span class="keyword">true</span>;
-<a name="l00260"></a>00260                         <span class="keywordflow">for</span>(i = 0; i &lt; verts.size(); ++i){
-<a name="l00261"></a>00261                                 <span class="keywordflow">if</span>(x == verts[i]) goodvd = <span class="keyword">false</span>;}
-<a name="l00262"></a>00262                         <span class="keywordflow">if</span>(goodvd) <span class="keywordflow">return</span> x;}
+<a name="l00255"></a><a class="code" href="classGraph.html#ad59fd5bec735a259bacca0e4803e1aa3">00255</a>         <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> <a class="code" href="classGraph.html#ad59fd5bec735a259bacca0e4803e1aa3">randomvd</a>() {
+<a name="l00256"></a>00256             <a class="code" href="classGraph.html#adeba8286db7d42e6ffac2554b314d61d">vertex_descriptor</a> x;
+<a name="l00257"></a>00257             <span class="keywordflow">for</span>(x = 0; x &lt; numeric_limits&lt;int&gt;::max(); ++x){
+<a name="l00258"></a>00258                 <span class="keywordtype">size_t</span> i;
+<a name="l00259"></a>00259                 <span class="keywordtype">bool</span> goodvd = <span class="keyword">true</span>;
+<a name="l00260"></a>00260                 <span class="keywordflow">for</span>(i = 0; i &lt; verts.size(); ++i){
+<a name="l00261"></a>00261                     <span class="keywordflow">if</span>(x == verts[i]) goodvd = <span class="keyword">false</span>;}
+<a name="l00262"></a>00262                 <span class="keywordflow">if</span>(goodvd) <span class="keywordflow">return</span> x;}
 <a name="l00263"></a>00263                         
-<a name="l00264"></a>00264                 <span class="keywordflow">return</span> numeric_limits&lt;int&gt;::max();}
+<a name="l00264"></a>00264             <span class="keywordflow">return</span> numeric_limits&lt;int&gt;::max();}
 <a name="l00265"></a>00265 
 <a name="l00266"></a>00266     <span class="keyword">public</span>:
 <a name="l00267"></a>00267         <span class="comment">// ------------</span>
@@ -332,7 +332,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 4 2014 21:56:14 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 6 2014 22:32:10 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

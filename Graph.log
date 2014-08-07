@@ -1,3 +1,39 @@
+commit ce2ebc0dfc9936896d873c5c5ad72fb2bcc4ef24
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Wed Aug 6 22:30:12 2014 -0500
+
+    fixed formatting
+
+commit 044e46c38b86431bd80430cd876e6050988ea43b
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Wed Aug 6 20:27:39 2014 -0500
+
+    format issue
+
+commit 05573b98237c3bb422e53a9c910bdf5a5718fca2
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Wed Aug 6 20:17:02 2014 -0500
+
+    minor mistake
+
+commit 6671406b58e90867aef53b48f65f40f8564a811c
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Aug 6 12:42:07 2014 -0500
+
+    Cleaning random remnants
+
+commit 2bede00a2a36967e3cc96e11fbd26bc3f215ec69
+Author: Martin Eischeid <martye@cs.utexas.edu>
+Date:   Wed Aug 6 12:41:07 2014 -0500
+
+    Removed randomized vertex descriptors
+
+commit dcc556b249a3c03704e191a5fa6918c14b3465ab
+Author: Hunter DeGroot <hunterdegroot@gmail.com>
+Date:   Mon Aug 4 21:59:35 2014 -0500
+
+    final push with log file
+
 commit efd70a03176c70085b8960fb9954e5e2315bda5b
 Author: Hunter DeGroot <hunterdegroot@gmail.com>
 Date:   Mon Aug 4 21:58:21 2014 -0500
