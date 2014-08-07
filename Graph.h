@@ -104,7 +104,7 @@ class Graph {
         friend vertex_descriptor add_vertex (Graph& x) {
             vertex_descriptor rvd = x.randomvd();
             x.g.push_back(make_pair(rvd,vector<edge_descriptor>()));
-	    sort(x.g.begin(), x.g.end(), vSort());
+	    	sort(x.g.begin(), x.g.end(), vSort());
             x.verts.push_back(rvd);
             return rvd;}
 
